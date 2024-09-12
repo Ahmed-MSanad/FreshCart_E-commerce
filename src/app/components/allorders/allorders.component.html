@@ -1,0 +1,37 @@
+<section class="p-6">
+    @if(allOrders){
+        <div class="container bg-[--light-color] p-6 shadow">
+            <h1 class="text-3xl font-semibold text-[--main-color]">Congrats {{allOrders.user.name}}, The Cart Now Is Yours</h1>
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-2xl font-medium">{{allOrders.user.name}}'s Cart:</h2>
+                    <h3 class="text-lg text-main">Total Cart Price: {{allOrders.totalOrderPrice | currency : "GBP"}}</h3>
+                </div>
+            </div>
+
+            @for(product of allOrders.cartItems ; track product._id){
+                <div class="flex justify-between items-center py-4 border-b space-x-4">
+                    <div class="left flex w-2/12">
+                        <div>
+                            <img [src]="product.product.imageCover" [alt]="product.product.title" class="w-full">
+                        </div>
+                    </div>
+                    <div class="right flex justify-between items-start w-10/12">
+                        <div class="flex flex-col justify-center items-start space-y-4">
+                            <h2>{{product.product.title}}</h2>
+                            <h3 class="text-lg text-[--main-color]">Price: {{product.price}}</h3>
+                        </div>
+                        <div class="flex">
+                            <p class="p-2 text-4xl font-bold text-[--main-color]">{{product.count}}</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @else{
+        <div class="flex justify-center">
+            <i class="fa-solid fa-spin fa-3x fa-spinner"></i>
+        </div>
+    }
+</section>

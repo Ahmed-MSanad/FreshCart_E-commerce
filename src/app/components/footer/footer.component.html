@@ -1,0 +1,26 @@
+<div class="bg-[--light-color] px-4 py-8 dark:bg-slate-800 dark:text-white">
+    <div class="container">
+        <h2 class="text-2xl font-semibold">{{"footer.Get the FreshCart app" | translate}}</h2>
+        <h3 class="text-slate-500">{{"footer.We will send you a link, open it on your phone to download the app." | translate}}</h3>
+        <div class="flex flex-wrap justify-between py-6 space-y-4 lg:space-y-0">
+            <input type="Email" [placeholder]="'footer.Email'| translate" class="border bg-white p-2 w-full lg:w-9/12">
+            <button class="btn-main w-full lg:w-2/12 text-nowrap" (click)="shareApp($event)">{{"footer.Share App Link" | translate}}</button>
+        </div>
+        <hr/>
+        <div class="flex flex-wrap justify-center space-y-4 lg:space-y-0 lg:justify-between py-6">
+            <div class="flex flex-wrap justify-center items-center">
+                <h3 class="w-1/5  lg:w-20 text-center font-semibold">{{"footer.Payments Partners" | translate}}</h3>
+                <div class="w-1/5 lg:w-20 "><img class="w-full" src="./assets/images/amazon-pay.png" alt="amazon-pay"></div>
+                <div class="w-1/5 lg:w-20 "><img class="w-full" src="./assets/images/American-Express-Color.png" alt="American-Express"></div>
+                <div class="w-1/5 lg:w-20 "><img class="w-full" src="./assets/images/mastercard.webp" alt="mastercard"></div>
+                <div class="w-1/5 lg:w-20 "><img class="w-full" src="./assets/images/paypal.png" alt="paypal"></div>
+            </div>
+            <div class="flex flex-wrap justify-center items-center">
+                <h3 class="w-1/3 lg:w-20 text-center font-semibold">{{"footer.Get deliveries with FreshCart" | translate}}</h3>
+                <div class="w-1/3 lg:w-20"><img class="w-full" src="./assets/images/get-apple-store.png" alt="apple-store"></div>
+                <div class="w-1/3 lg:w-20"><img class="w-full" src="./assets/images/get-google-play.png" alt="google-play"></div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+</div>

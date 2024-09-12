@@ -1,0 +1,25 @@
+<section class="p-6" @backInDown>
+    <div class="container bg-[--light-color] dark:bg-black dark:text-white p-6 shadow">
+        <h1 class="text-3xl font-semibold text-[--main-color]">{{"product.WishList" | translate}}: </h1>
+
+        @for(product of wishListProducts() ; track product._id){
+            <div class="flex justify-between items-center py-4 border-b space-x-4">
+                <div class="left flex w-2/12 m-4">
+                    <div>
+                        <img [src]="product.imageCover" [alt]="product.title" class="w-full">
+                    </div>
+                </div>
+                <div class="right flex justify-between items-start w-10/12">
+                    <div class="flex flex-col justify-center items-start space-y-4">
+                        <h2>{{"product."+product.title.split(" ",2).join(" ") | translate}}</h2>
+                        <h3 class="text-lg text-[--main-color]">{{"product.Price" | translate}}: {{product.price}}</h3>
+                        <button (click)="removeFromWishList(product._id)"><i class="fa-regular text-rose-500 fa-trash-can"></i> {{"product.Remove" | translate}}</button>
+                    </div>
+                    <div>
+                        <button class="btn-main" (click)="addProductToCart(product._id,$event)">{{"product.Add to Cart" | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

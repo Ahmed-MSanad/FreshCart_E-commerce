@@ -1,0 +1,44 @@
+<section>
+    <!-- Main Section -->
+    <section class="p-6" @fadeInDownUp>
+        <div class="container">
+            <div class="flex flex-wrap">
+                <div class="w-full md:w-3/4">
+                    <owl-carousel-o [options]="mainCustomOptions">
+                        <ng-template carouselSlide><img class="w-full h-[500px]" src="./assets/images/slider-image-3.jpeg" alt="slider image"></ng-template>
+                        <ng-template carouselSlide><img class="w-full h-[500px]" src="./assets/images/slider-image-1.jpeg" alt="slider image"></ng-template>
+                        <ng-template carouselSlide><img class="w-full h-[500px]" src="./assets/images/slider-image-2.jpeg" alt="slider image"></ng-template>
+                        <ng-template carouselSlide><img class="w-full h-[500px]" src="./assets/images/slider-2.jpeg" alt="slider image"></ng-template>
+                        <ng-template carouselSlide><img class="w-full h-[500px]" src="./assets/images/grocery-banner.png" alt="slider image"></ng-template>
+                        <ng-template carouselSlide><img class="w-full h-[500px]" src="./assets/images/grocery-banner-2.jpeg" alt="slider image"></ng-template>
+                    </owl-carousel-o>
+                </div>
+                <div class="hidden md:block md:w-1/4">
+                    <img class="w-full h-[250px]" src="./assets/images/slider-image-2.jpeg" alt="slider image">
+                    <img class="w-full h-[250px]" src="./assets/images/slider-image-1.jpeg" alt="slider image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Date -->
+    <div class="container">
+        <h2 class="text-6xl font-bold capitalize">Hello <span class="text-[--main-color]">{{_AuthService.userData?.name}}</span></h2>
+        <h2 class="font-bold">{{todayDate | date : 'full' : "" : "ar"}}</h2>
+    </div>
+
+    <!-- Categories section -->
+
+    <app-categories [isSlider]="true"></app-categories>
+
+
+    <!-- Products section -->
+
+    @defer(on viewport){
+        <app-products [title]="'Popular Products'" [numberOfDisplayedProducts]="12"></app-products>
+    }
+    @placeholder{
+        <i class="fa-spin fa-spinner fa-2x"></i>
+    }
+
+</section>

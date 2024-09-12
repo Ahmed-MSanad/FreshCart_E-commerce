@@ -1,0 +1,85 @@
+<section>
+    <div class="container p-10">
+        <h2 class="text-2xl my-4 text-main font-semibold">Order Now:</h2>
+        <form [formGroup]="shippingForm" (ngSubmit)="orderSubmit()">
+            <div>
+                <label class="font-semibold" for="details">Details:</label>
+                <div class="relative">
+                    <input formControlName="details" class="border rounded-md p-1.5 w-full" type="text" id="details" name="userDetails">
+                    @if(shippingForm.get("details")?.touched || shippingForm.get("details")?.dirty){
+                        @if(shippingForm.get("details")?.valid){
+                            <span class="absolute bg-green-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-check"></i></span>
+                        }
+                        @else{
+                            <span class="absolute bg-red-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-xmark"></i></span>
+                        }
+                    }
+                </div>
+                @if(shippingForm.get("details")?.errors && (shippingForm.get("details")?.touched || shippingForm.get("details")?.dirty)){
+                    <div class="bg-rose-300 border border-rose-800 p-5 rounded-md font-bold capitalize">
+                        @if(shippingForm.get("details")?.getError("required")){
+                            <p>Details is required</p>
+                        }
+                    </div>
+                }
+            </div>
+            <div>
+                <label class="font-semibold" for="phone">Phone:</label>
+                <div class="relative">
+                    <input formControlName="phone" class="border rounded-md p-1.5 w-full" type="tel" id="phone" name="userPhone">
+                    @if(shippingForm.get("phone")?.touched || shippingForm.get("phone")?.dirty){
+                        @if(shippingForm.get("phone")?.valid){
+                            <span class="absolute bg-green-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-check"></i></span>
+                        }
+                        @else{
+                            <span class="absolute bg-red-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-xmark"></i></span>
+                        }
+                    }
+                </div>
+                @if(shippingForm.get("phone")?.errors && (shippingForm.get("phone")?.touched || shippingForm.get("phone")?.dirty)){
+                    <div class="bg-rose-300 border border-rose-800 p-5 rounded-md font-bold capitalize">
+                        @if(shippingForm.get("phone")?.getError("required")){
+                            <p>phone is required</p>
+                        }
+                        @if(shippingForm.get("phone")?.getError("pattern")){
+                            <p>must be of phone form</p>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div>
+                <label class="font-semibold" for="city">City:</label>
+                <div class="relative">
+                    <input formControlName="city" class="border rounded-md p-1.5 w-full" type="text" id="city" name="userCity">
+                    @if(shippingForm.get("city")?.touched || shippingForm.get("city")?.dirty){
+                        @if(shippingForm.get("city")?.valid){
+                            <span class="absolute bg-green-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-check"></i></span>
+                        }
+                        @else{
+                            <span class="absolute bg-red-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-xmark"></i></span>
+                        }
+                    }
+                </div>
+                @if(shippingForm.get("city")?.errors && (shippingForm.get("city")?.touched || shippingForm.get("city")?.dirty)){
+                    <div class="bg-rose-300 border border-rose-800 p-5 rounded-md font-bold capitalize">
+                        @if(shippingForm.get("city")?.getError("required")){
+                            <p>city is required</p>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="flex my-6 justify-end items-center space-x-4">
+                <div>
+                    <button type="submit" [disabled]="isLoading" class="btn-main">
+                        Check Out
+                        @if(isLoading){
+                            <i class="fa-solid fa-spin fa-spinner"></i>
+                        }
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,47 @@
+<section class="p-6 mt-20" @slideRight>
+    <div class="container bg-[--light-color] dark:bg-black dark:text-white p-6 shadow">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-medium">{{"product.Shop Cart" | translate}}:</h1>
+                <h3 class="text-lg text-main">{{"product.Total Cart Price" | translate}}: {{_CartService.cart().totalCartPrice | currency : "GBP"}}</h3>
+            </div>
+            <button type="button" class="btn-main" (click)="clearAllCart($event)">{{"product.Clear Cart" | translate}}</button>
+        </div>
+
+        @for(product of _CartService.cart().products ; track product.product.id){
+            <div class="flex justify-between items-center py-4 border-b space-x-4">
+                <div class="left flex w-2/12 m-4">
+                    <div>
+                        <img [src]="product.product.imageCover" [alt]="product.product.title" class="w-full">
+                    </div>
+                </div>
+                <div class="right flex justify-between items-start w-10/12">
+                    <div class="flex flex-col justify-center items-start space-y-4">
+                        <h2>{{"product."+product.product.title.split(" ",2).join(" ") | translate}}</h2>
+                        <h3 class="text-lg text-[--main-color]">{{"product.Price" | translate}}: {{product.price}}</h3>
+
+                        <button type="button" [swal]="{
+                                title: 'Are you sure?',
+                                text: 'You wont be able to revert this!',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, delete it!'}" 
+                            (confirm)="removeProduct($event,product.product._id)"><i class="fa-regular text-[--main-color] fa-trash-can"></i> {{"product.Remove" | translate}}</button>
+
+                    </div>
+                    <div class="flex">
+                        <button type="button" class="p-2 rounded-md border border-[--main-color]" (click)="changeProductCount(product.product.id,product.count + 1)">+</button>
+                        <p class="p-2">{{product.count}}</p>
+                        <button type="button" class="p-2 rounded-md border border-[--main-color]" (click)="changeProductCount(product.product.id,product.count - 1)">-</button>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="my-4">
+            <button type="button" class="btn-main" [routerLink]="['/order',_CartService.cart()._id]" [disabled]="isCartEmpty()">{{"product.Buy Now" | translate}}</button>
+        </div>
+    </div>
+</section>
+

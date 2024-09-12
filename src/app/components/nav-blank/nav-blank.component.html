@@ -1,0 +1,58 @@
+<header class="px-4 fixed top-0 left-0 right-0 bg-[--light-color] z-50 dark:bg-slate-800 dark:text-white">
+    <nav class="container mx-auto py-4 flex justify-between items-center relative">
+        <div class="">
+            <a routerLink="home"><img src="./assets/images/freshcart-logo.svg" alt="freshcart-logo"></a>
+        </div>
+        <div #navMenu class="nav-links absolute hidden bg-white top-full w-full text-center lg:w-auto lg:relative lg:!block lg:bg-transparent">
+            <ul class="space-y-5 py-4 px-6 w-full bg-white dark:bg-black lg:w-auto shadow-lg dark:shadow-[#8989898b] text-nowrap lg:rounded-full lg:flex lg:space-x-1 lg:space-y-0">
+                <li class="lg:bg-transparent lg:dark:bg-transparent animated-links border-b pb-2 lg:border-0"><a class="p-2 nav-link dark:text-white" routerLinkActive="active-link" routerLink="home">{{"navbar.home" | translate}}</a></li> <!-- active --> <!--  -->
+                <li class="lg:bg-transparent lg:dark:bg-transparent animated-links border-b pb-2 lg:border-0"><a class="p-2 nav-link dark:text-white" routerLinkActive="active-link" routerLink="products">{{"navbar.products" | translate}}</a></li> <!-- link_line --> <!--  -->
+                <li class="lg:bg-transparent lg:dark:bg-transparent animated-links border-b pb-2 lg:border-0"><a class="p-2 nav-link dark:text-white" routerLinkActive="active-link" routerLink="categories">{{"navbar.categories" | translate}}</a></li> <!-- link_line --> <!--  -->
+                <li class="lg:bg-transparent lg:dark:bg-transparent animated-links border-b pb-2 lg:border-0"><a class="p-2 nav-link dark:text-white" routerLinkActive="active-link" routerLink="brands">{{"navbar.brands" | translate}}</a></li> <!-- link_line --> <!--  -->
+
+                <li class="cursor-pointer relative lg:bg-transparent lg:dark:bg-transparent animated-links border-b pb-2 lg:border-0" (click)="socialState = socialState === 'closed' ? 'open' : 'closed'">
+                    {{"navbar.Social Us" | translate}} &DownArrow;
+                    <ul [@openClose]="socialState" class="overflow-hidden flex justify-around max-h-0 transition-all duration-500 lg:absolute z-[9999] left-0 rounded-lg top-full bg-slate-50">
+                        <li class="p-2"><a href="#"><i class="fa-brands fa-lg fa-instagram"></i></a></li>
+                        <li class="p-2"><a href="#"><i class="fa-brands fa-lg fa-facebook"></i></a></li>
+                        <li class="p-2"><a href="#"><i class="fa-brands fa-lg fa-tiktok"></i></a></li>
+                        <li class="p-2"><a href="#"><i class="fa-brands fa-lg fa-twitter"></i></a></li>
+                        <li class="p-2"><a href="#"><i class="fa-brands fa-lg fa-linkedin"></i></a></li>
+                        <li class="p-2"><a href="#"><i class="fa-brands fa-lg fa-youtube"></i></a></li>
+                    </ul>
+                </li>
+
+                <li class="cursor-pointer relative lg:bg-transparent lg:dark:bg-transparent animated-links border-b pb-2 lg:border-0" (click)="dropDownState = dropDownState === 'closed' ? 'open' : 'closed'">
+                    {{"navbar.lang" | translate}} &DownArrow;
+                    <ul [@openClose]="dropDownState" class="max-h-0 overflow-hidden transition-all lg:w-full duration-500 lg:absolute z-[9999] left-0 rounded-lg top-full bg-slate-50">
+                        <li [class]="{'bg-[--main-color]':_TranslateService.currentLang === 'ar'}" (click)="changeLang('ar')" class="p-2 text-black cursor-pointer border-b hover:bg-slate-100">Ar</li>
+                        <li [class]="{'bg-[--main-color]':_TranslateService.currentLang === 'en'}" (click)="changeLang('en')" class="p-2 text-black cursor-pointer border-b hover:bg-slate-100">En</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="flex items-center dark:text-white">
+                <i #darkModeBtn (click)="onDarkMode()" class="fa-regular fa-sun text-2xl cursor-pointer"></i>
+                <li class="p-2 relative">
+                    <a href="#" routerLink="cart" class="dark:text-white">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    <span class="absolute z-50 w-6 h-6 flex items-center justify-center text-sm rounded-full bg-[--main-color] -top-2 right-0 text-white">{{cartCount()}}</span>
+                </li>
+                <li class="p-2 relative">
+                    <a href="#" routerLink="/wishlist" class="dark:text-white">
+                        <i class="fa-solid fa-heart"></i>
+                    </a>
+                    <span class="absolute z-50 w-6 h-6 flex items-center justify-center text-sm rounded-full bg-rose-500 -top-2 right-0 text-white">{{wishListCount()}}</span>
+                </li>
+                
+                <button (click)="_AuthService.signOut()">{{"navbar.signout" | translate}}</button>
+            </ul>
+        </div>
+        <div class="text-3xl lg:hidden">
+            <button #openBtn (click)="onClickMenu()"><i class="fa-solid fa-xl fa-bars"></i></button>
+            <button #closeBtn (click)="onClickMenu()" class="hidden"><i class= "fa-solid fa-xl fa-xmark cursor-pointer"></i></button>
+        </div>
+    </nav>
+</header>

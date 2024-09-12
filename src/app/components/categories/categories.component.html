@@ -1,0 +1,27 @@
+<section class="p-6" @zoomIn>
+    <div class="container">
+        <h2 class="text-4xl font-medium p-2 mt-10">{{"categories.Shop Categories" | translate}}</h2>
+        @if(isSlider){
+            <owl-carousel-o [options]="categoryCustomOptions">
+                @for(category of categoryList() ; track category._id){
+                    <ng-template carouselSlide>
+                        <img [src]="category.image" [alt]="category.name" class="w-full h-64">
+                        <h3 class="text-xl">{{"categories."+category.name | translate}}</h3>
+                    </ng-template>
+                }
+            </owl-carousel-o>
+        }
+        @else{
+            <div class="flex flex-wrap">
+                @for(category of categoryList() ; track category._id){
+                    <div class="outer p-2 sm:w-1/2 md:w-1/4 lg:w-1/6 cursor-pointer" [routerLink]="['/categoryDetails',category._id]">
+                        <div class="inner product p-4 h-full">
+                            <img [src]="category.image" [alt]="category.name" class="w-full h-64">
+                            <h3 class="text-xl">{{"categories."+category.name | translate}}</h3>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

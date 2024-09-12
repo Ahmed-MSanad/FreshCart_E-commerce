@@ -1,0 +1,78 @@
+<section>
+    <div class="container p-10">
+        <h2 class="text-2xl my-4 text-main font-semibold">Login Now:</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+            <div>
+                <label class="font-semibold" for="email">email:</label>
+                <div class="relative">
+                    <input formControlName="email" class="border rounded-md p-1.5 w-full" type="email" id="email" name="userEmail">
+                    @if(loginForm.get("email")?.touched || loginForm.get("email")?.dirty){
+                        @if(loginForm.get("email")?.valid){
+                            <span class="absolute bg-green-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-check"></i></span>
+                        }
+                        @else{
+                            <span class="absolute bg-red-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-xmark"></i></span>
+                        }
+                    }
+                </div>
+                @if(loginForm.get("email")?.errors && (loginForm.get("email")?.touched || loginForm.get("email")?.dirty)){
+                    <div class="bg-rose-300 border border-rose-800 p-5 rounded-md font-bold capitalize">
+                        @if(loginForm.get("email")?.getError("required")){
+                            <p>email is required</p>
+                        }
+                        @if(loginForm.get("email")?.getError("email")){
+                            <p>must be of email form</p>
+                        }
+                    </div>
+                }
+            </div>
+            <div>
+                <label class="font-semibold" for="password">password:</label>
+                <div class="relative">
+                    <input formControlName="password" class="border rounded-md p-1.5 w-full" type="password" id="password" name="userPassword">
+                    @if(loginForm.get("password")?.touched || loginForm.get("password")?.dirty){
+                        @if(loginForm.get("password")?.valid){
+                            <span class="absolute bg-green-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-check"></i></span>
+                        }
+                        @else{
+                            <span class="absolute bg-red-500 w-8 h-8 flex justify-center items-center rounded-full right-5 top-1/2 -translate-y-1/2 text-white"><i class="fa-solid fa-xmark"></i></span>
+                        }
+                    }
+                </div>
+                @if(loginForm.get("password")?.errors && (loginForm.get("password")?.touched || loginForm.get("password")?.dirty)){
+                    <div class="bg-rose-300 border border-rose-800 p-5 rounded-md font-bold capitalize">
+                        @if(loginForm.get("password")?.getError("required")){
+                            <p>password is required</p>
+                        }
+                        @if(loginForm.get("password")?.getError("pattern")){
+                            <p>must be of password form</p>
+                        }   
+                    </div>
+                }
+            </div>
+            <div class="flex my-6 justify-end items-center space-x-4">
+                <div>
+                    <button type="button" class="text-sky-600 hover:text-sky-400 font-bold" routerLink="/forgetPassword">Forget Password</button>
+                </div>
+                <div>
+                    <button type="submit" [disabled]="isLoading" class="btn-main">
+                        Login
+                        @if(isLoading){
+                            <i class="fa-solid fa-spin fa-spinner"></i>
+                        }
+                    </button>
+                </div>
+            </div>
+            @if(loginErrorMessage){
+                <div class="bg-rose-300 border border-rose-800 p-5 rounded-md font-bold capitalize">
+                    <p>{{loginErrorMessage}}</p>
+                </div>
+            }
+            @if(isLoginSuccess){
+                <div class="bg-green-300 border border-green-800 p-5 rounded-md font-bold capitalize">
+                    <p>Login Success 😀!</p>
+                </div>
+            }
+        </form>
+    </div>
+</section>

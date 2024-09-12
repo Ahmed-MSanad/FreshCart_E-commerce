@@ -1,0 +1,29 @@
+@if(theProduct){
+    <section class="p-6 min-h-screen flex flex-col justify-center">
+        <h2 class="text-4xl font-bold text-[--main-color] text-center my-12">{{"product.Product Details" | translate}}</h2>
+        <div class="flex flex-wrap items-center">
+            <div class="w-full md:w-1/4 p-3">
+                <owl-carousel-o [options]="customOptions">
+                    @for(productImg of theProduct.images ; track theProduct._id){
+                        <ng-template carouselSlide>
+                            <img [src]="productImg" [alt]="theProduct.title" [title]="theProduct.title" class="w-full">
+                        </ng-template>
+                    }
+                </owl-carousel-o>
+            </div>
+            <div class="w-full md:w-3/4 p-3">
+                <p class="text-xl">{{"product."+theProduct.title.split(" ",2).join(" ") | translate}}</p>
+                <p class="p-4 text-slate-400">{{theProduct.description}}</p>
+                <h3>{{theProduct.category.name}}</h3>
+                <div class="flex justify-between">
+                    <h3>{{theProduct.price}}EGP</h3>
+                    <h3><i class="fa-solid fa-star text-[--rating-color]"></i> {{theProduct.ratingsAverage}}</h3>
+                </div>
+                <div class="text-end px-3">
+                    <button type="button" (click)="_WishlistService.addAndRemoveToWishlist($event,theProduct._id)"><i class="fa-2x text-rose-400 hover:text-rose-700 fa-heart" [ngClass]="{'fa-solid':theProduct.wishProduct,'fa-regular':!theProduct.wishProduct}"></i></button>
+                    <button class="btn-main w-full">+ {{"product.Add to Cart" | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </section>
+}

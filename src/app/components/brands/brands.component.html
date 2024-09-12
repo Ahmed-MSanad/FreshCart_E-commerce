@@ -1,0 +1,15 @@
+<section class="p-6" @slideRight>
+    <div class="container">
+        <h2 class="text-4xl font-medium p-2 mt-10">{{"brands.Shop Brands" | translate}}</h2>
+        <div class="flex flex-wrap">
+            @for(brand of brandsList() ; track brand._id){
+                <div class="outer p-2 sm:w-1/2 md:w-1/4 lg:w-1/6 cursor-pointer" [routerLink]="['/brandDetails',brand._id]">
+                    <div class="inner product p-4 h-full">
+                        <img [src]="brand.image" [alt]="brand.name" class="w-full h-64">
+                        <h3 class="text-xl">{{brand.name}}</h3>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
